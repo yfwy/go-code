@@ -16,8 +16,6 @@
       <change afterPath="$PROJECT_DIR$/go-code/text/text03/selectors.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/go-code/text/text04/cal.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/go-code/text/text04/cal_test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/go_code/管道/struck02.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/go_code/管道/struct01.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -170,7 +168,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="376" />
     <option name="y" value="-8" />
     <option name="width" value="1382" />
@@ -342,7 +340,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="784" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49846154" visible="true" weight="0.15658094" />
