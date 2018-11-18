@@ -1,0 +1,13 @@
+debug
+.idea/
+test/debug
+test/main.go
+bin/
+*.o
+*.a
+*.so
+*.exe
+chatonline
+main
+etc/config.toml
+chat33

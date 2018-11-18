@@ -1,0 +1,40 @@
+before_script:
+    - export GO_PROJECT_NAMESPACE="$GOPATH/src/gitlab.33.cn/$CI_PROJECT_NAMESPACE"
+    - echo $GO_PROJECT_NAMESPACE
+    - mkdir -p $GO_PROJECT_NAMESPACE
+    - ln -srf $(pwd) $GO_PROJECT_NAMESPACE/$CI_PROJECT_NAME
+    - export GO_PROJECT_PATH=$GO_PROJECT_NAMESPACE/$CI_PROJECT_NAME
+    - cd $GO_PROJECT_PATH
+    - make clean
+
+after_script:
+    - make clean
+
+stages:
+    - build
+    - test
+    - deploy
+
+go_fmt:
+    stage: build
+    script:
+        - make checkgofmt
+    tags:
+        - chat
+    only:
+        - ci
+        - master
+        - dld-dev
+        - wsj
+
+go_lint:
+    stage: build
+    script:
+        - make linter
+    tags:
+        - chat
+    only:
+        - ci
+        - master
+        - dld-dev
+        - wsj

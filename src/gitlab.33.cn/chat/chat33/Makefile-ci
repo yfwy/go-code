@@ -1,0 +1,53 @@
+.PHONY: help dep fmt vet checkgofmt linter
+
+help: ## Display this help screen
+	@printf "Help doc:\nUsage: make [command]\n"
+	@printf "[command]\n"
+	@grep -h -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+
+dep: ## Get the dependencies
+	@go get -u gopkg.in/alecthomas/gometalinter.v2
+	@gometalinter.v2 -i
+
+fmt: ## go fmt
+	@go fmt ./...
+	@find . -name '*.go' -not -path "./vendor/*" | xargs goimports -l -w
+
+vet: ## go vet
+	@go vet ./...
+
+checkgofmt: ## get all go files and run go fmt on them
+	@files=$$(find . -name '*.go' -not -path "./vendor/*" | xargs gofmt -l -s); if [ -n "$$files" ]; then \
+		  echo "Error: 'make fmt' needs to be run on:"; \
+		  echo "$${files}"; \
+		  exit 1; \
+		  fi;
+	@files=$$(find . -name '*.go' -not -path "./vendor/*" | xargs goimports -l); if [ -n "$$files" ]; then \
+		  echo "Error: 'make fmt' needs to be run on:"; \
+		  echo "$${files}"; \
+		  exit 1; \
+		  fi;
+
+linter: ## Use gometalinter check code, ignore some unserious warning
+	@res=$$(gometalinter.v2 -t --sort=linter --enable-gc --deadline=2m --disable-all \
+	--enable=gofmt \
+	--enable=gosimple \
+	--enable=deadcode \
+	--enable=unconvert \
+	--enable=interfacer \
+	--enable=varcheck \
+	--enable=structcheck \
+	--enable=goimports \
+	--vendor ./...) \
+#	--enable=vet \
+#	--enable=staticcheck \
+#	--enable=gocyclo \
+#	--enable=staticcheck \
+#	--enable=golint \
+#	--enable=unused \
+#	--enable=gotype \
+#	--enable=gotypex \
+	if [ -n "$${res}" ]; then \
+		echo "$${res}"; \
+		exit 1; \
+		fi;
